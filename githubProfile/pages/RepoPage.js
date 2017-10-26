@@ -17,7 +17,7 @@ import {
 import styles from '../styles.js';
 
 // url to get my repos
-const url = 'https://api.github.com/users/yzhan189/repos?client_id=38e809410ccc3c8ddfd5&client_secret=5133a35db6667e1efe536f0a9bd081be0b76a59e';
+const url = 'https://api.github.com/users/yzhan189/repos?client_id=xxxx&client_secret=xxxx';
 // for back up use, import repo json from local file
 var json = require('../repos.json');
 
