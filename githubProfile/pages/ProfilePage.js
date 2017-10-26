@@ -12,9 +12,9 @@ import styles from '../styles.js';
 // api query
 const API = 'https://api.github.com/users';
 const API2 = 'https://api.github.com/user';
-// oath add to the end of query
-const OAuth = '?client_id=38e809410ccc3c8ddfd5&client_secret=5133a35db6667e1efe536f0a9bd081be0b76a59e';
-const token = '?access_token=9cee64038419532ed96bd0bb7810e6e25ad7f86a';
+// oauth and access token not shown.
+const OAuth = '?client_id=xxxx&client_secret=xxxx';
+const token = '?access_token=9xxxx';
 // user name to github to look at
 var yourLogin = "yzhan189"
 
