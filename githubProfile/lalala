@@ -1,0 +1,108 @@
+import React, {Component} from 'react';
+import {
+    View,
+    Text,
+    Button,
+    Image,
+    ScrollView,
+    TabBarIOS,
+    FlatList,
+    SectionList,
+    Header,
+    TouchableHighlight,
+    NavigatorIOS,
+    WebView,
+} from 'react-native';
+import styles from '../styles.js';
+
+const url = 'https://api.github.com/users/yzhan189/followers?client_id=38e809410ccc3c8ddfd5&client_secret=5133a35db6667e1efe536f0a9bd081be0b76a59e';
+
+
+export default class FollowerPage extends Component {
+    static navigationOptions = {
+      tabBarLabel: 'Followers',
+      tabBarIcon: ({ tintColor }) => (
+        <Image
+          source={require('../images/images.png')}
+          style={[styles.icon, {tintColor: tintColor}]}
+        />
+      ),
+    };
+  render() {
+      return (
+          <NavigatorIOS
+            initialRoute={{
+              component: UserList,
+              title: 'My Public Repositories',
+            }}
+            style={{flex: 1}}
+          />
+      );
+  }
+}
+
+
+
+class UserList extends Component {
+    /* constr: hold json list from github */
+    constructor(props) {
+      super(props)
+      this.state = {
+        json: []
+      }
+    }
+
+    /* navigation: go back */
+    _handleBackPress() {
+        // pop out, so you go to the last page view
+        this.props.navigator.pop();
+    }
+    /* navigation: go to next page  */
+    _handleNextPress(nextRoute) {
+        // add nextRoute, and go to that page view
+        this.props.navigator.push(nextRoute);
+    }
+
+    /* fecch repository as a json list and store in json */
+    fetchRepos() {
+      fetch(url)
+        .then((res) => res.json() )
+        .then((data) => {
+            this.setState({
+            json: data,
+          })
+        })
+        .catch((error) => window.alert("Error in fectch") )
+        // alert window when there is error.
+    }
+
+
+    /* render each item in the list, it apply to the list  */
+    renderItem = (item) =>{
+
+        // make a list item as a button
+        // when click the button go to next view
+        return  (
+            <TouchableHighlight onPress={() => this._handleNextPress(UserList)} underlayColor="powderblue" >
+                <View style = {styles.listItemContainer}>
+                    <Text style={styles.item}>{item.item.name}</Text>
+                    <Text style={styles.subitem}>{item.item.login}</Text>
+                </View>
+            </TouchableHighlight>
+        );
+    }
+
+    render() {
+        // first get information
+        this.fetchRepos();
+        // make a list view it will render each item in data
+        return (
+          <View style = {styles.listContainer}>
+            <FlatList
+              data={this.state.json}
+              renderItem={this.renderItem}
+            />
+          </View>
+        );
+    }
+}
