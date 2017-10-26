@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import styles from '../styles.js';
 
-const url = 'https://api.github.com/users/yzhan189/followers?client_id=38e809410ccc3c8ddfd5&client_secret=5133a35db6667e1efe536f0a9bd081be0b76a59e';
+const url = 'https://api.github.com/users/yzhan189/followers?client_id=xxxx&client_secret=xxxx';
 import ProfilePage from './ProfilePage.js';
 
 
